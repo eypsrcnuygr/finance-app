@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
+import { REACT_APP_API_TOKEN, apiUrl } from './helpers/variables';
 
 function App() {
   const [data, setData] = useState({});
-
-  const { REACT_APP_API_TOKEN } = process.env;
-  const apiUrl = 'https://financialmodelingprep.com/';
 
   async function getReq() {
     try {
