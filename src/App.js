@@ -1,28 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [data, setData] = useState({});
+
+  const { REACT_APP_API_TOKEN } = process.env;
+  const apiUrl = 'https://financialmodelingprep.com/';
+
+  async function getReq() {
+    try {
+      const response = await fetch(
+        `${apiUrl}/api/v3/profile/AAPL?apikey=${REACT_APP_API_TOKEN}`,
+      );
+      const data = await response.json();
+      return setData(data);
+    } catch (e) {
+      return e;
+    }
+  }
+
+  useEffect(() => {
+    getReq();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>{data[0].description}</div>
   );
 }
 
