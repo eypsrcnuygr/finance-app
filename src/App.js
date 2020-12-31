@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
-import { apiUrl } from './helpers/variables';
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
+import requestMaker from './helpers/requestMaker';
 
 function App() {
-  const [data, setData] = useState({});
-
-  async function getReq() {
-    try {
-      const response = await fetch(
-        `${apiUrl}/pokemon/ditto`,
-      );
-      const data = await response.json();
-      return setData(data);
-    } catch (e) {
-      return e;
-    }
-  }
-
-  useEffect(() => {
-    getReq();
-  }, []);
-
+  const value = requestMaker();
+  let i = 0;
+  console.log(value);
+  const realValues = value[0];
+  console.log(realValues);
   return (
-    <div>{data.abilities[0].ability.name}</div>
+    <div>
+      {value.map(element => {
+        i += 1;
+        return (
+          <div key={i}>
+            <p>{element.name}</p>
+            <p>{element.url}</p>
+          </div>
+        );
+      })}
+    </div>
+
   );
 }
 
