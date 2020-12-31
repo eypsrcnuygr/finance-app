@@ -20,8 +20,6 @@ function App() {
     getReq();
   }, []);
 
-  console.log(data.abilities[0].ability.name);
-
   return (
     <div>{data.abilities[0].ability.name}</div>
   );
