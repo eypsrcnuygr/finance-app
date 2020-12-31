@@ -14,8 +14,9 @@ class App extends React.Component {
   }
 
   render() {
-    let i = 0;
-    const { value } = this.state;
+    let i = -1;
+    const { value, data3 } = this.state;
+
     return (
       <div>
         {value.map(element => (
@@ -26,6 +27,7 @@ class App extends React.Component {
                 <p>{data.name}</p>
                 {' '}
                 <p>{data.url}</p>
+                <img src={data3[i]} alt="pokemon" />
               </div>
             );
           })))}

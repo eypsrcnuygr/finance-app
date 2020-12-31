@@ -1,2 +1,2 @@
-export const { REACT_APP_API_TOKEN } = process.env;
 export const apiUrl = 'https://pokeapi.co/api/v2';
+export const apiUrl2 = 'http://pokeapi.co/api/v2/pokemon';
