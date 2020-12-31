@@ -1,8 +1,6 @@
 import { apiUrl } from './variables';
 
-function requestMaker() {
-  const dataArr = [];
-
+function requestMaker(dataArr, state) {
   (async function getReq() {
     try {
       const response = await fetch(
@@ -10,15 +8,14 @@ function requestMaker() {
       );
       const data = await response.json();
       dataArr.push(data.results);
-      console.log(dataArr);
+      state.setState({
+        value: dataArr,
+      });
       return dataArr;
     } catch (e) {
       return e;
     }
   }());
-
-  console.log(dataArr);
-  return dataArr;
 }
 
 export default requestMaker;
