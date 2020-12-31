@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { REACT_APP_API_TOKEN, apiUrl } from './helpers/variables';
+import { apiUrl } from './helpers/variables';
 
 function App() {
   const [data, setData] = useState({});
@@ -7,7 +7,7 @@ function App() {
   async function getReq() {
     try {
       const response = await fetch(
-        `${apiUrl}/api/v3/profile/AAPL?apikey=${REACT_APP_API_TOKEN}`,
+        `${apiUrl}/pokemon/ditto`,
       );
       const data = await response.json();
       return setData(data);
@@ -20,8 +20,10 @@ function App() {
     getReq();
   }, []);
 
+  console.log(data.abilities[0].ability.name);
+
   return (
-    <div>{data[0].description}</div>
+    <div>{data.abilities[0].ability.name}</div>
   );
 }
 
