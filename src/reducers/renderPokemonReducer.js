@@ -5,20 +5,7 @@ const initialState = {
   error: '',
 };
 
-export const renderPokemonReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'RENDER_LIST': {
-      const { value, imageUrl } = state;
-      return {
-        value, imageUrl,
-      };
-    }
-    default:
-      return state;
-  }
-};
-
-export const FetchPokemonReducer = (state = initialState, action) => {
+const FetchPokemonReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_PRODUCT_BEGINNING':
       return {
@@ -43,3 +30,5 @@ export const FetchPokemonReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default FetchPokemonReducer;

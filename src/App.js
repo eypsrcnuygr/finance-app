@@ -2,13 +2,12 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
-import { renderList } from './actions/index';
 import requestMaker from './helpers/requestMaker';
 
 function mapStateToProps(state) {
   const {
     value, imageUrl, isFetching, error,
-  } = state;
+  } = state.FetchPokemonReducer;
 
   return {
     value, imageUrl, isFetching, error,
@@ -26,10 +25,38 @@ function App(props) {
     } = props;
     requestMaker(value, imageUrl);
   };
+  let renderedComponent;
+  let i = -1;
+  if (props.value === null) {
+    renderedComponent = (
+      <div>
+        <button onClick={() => handleClick(props)} type="button">Show List</button>
+      </div>
+    );
+  } else {
+    renderedComponent = (
+      <div>
+        {
+          props.value.map(data => {
+            i += 1;
+            return (
+              <div key={i}>
+                <p>{data.name}</p>
+                {' '}
+                <p>{data.url}</p>
+                <img src={props.imageUrl[i]} alt="pokemon" />
+              </div>
+            );
+          })
+}
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <button onClick={() => handleClick(props)} type="button">Show List</button>
-    </div>
+    <>
+      { renderedComponent }
+    </>
   );
 }
 
