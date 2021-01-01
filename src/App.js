@@ -1,38 +1,36 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+import { connect } from 'react-redux';
+import { renderList } from './actions/index';
 import requestMaker from './helpers/requestMaker';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: [],
-    };
-  }
+function mapStateToProps(state) {
+  const {
+    value, imageUrl, isFetching, error,
+  } = state;
 
-  componentDidMount() {
-    requestMaker([], this);
-  }
-
-  render() {
-    let i = -1;
-    const { value, data3 } = this.state;
-
-    return (
-      <div>
-        {value.map(element => (
-          element.map(data => {
-            i += 1;
-            return (
-              <div key={i}>
-                <p>{data.name}</p>
-                {' '}
-                <p>{data.url}</p>
-                <img src={data3[i]} alt="pokemon" />
-              </div>
-            );
-          })))}
-      </div>
-    );
-  }
+  return {
+    value, imageUrl, isFetching, error,
+  };
 }
-export default App;
+
+const mapDispatchToProps = dispatch => ({
+  requestMaker: (value, imageUrl) => dispatch(requestMaker(value, imageUrl)),
+});
+
+function App(props) {
+  const handleClick = props => {
+    const {
+      value, imageUrl, requestMaker,
+    } = props;
+    requestMaker(value, imageUrl);
+  };
+  return (
+    <div>
+      <button onClick={() => handleClick(props)} type="button">Show List</button>
+    </div>
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
