@@ -41,7 +41,7 @@ function App(props) {
             i += 1;
             return (
               <div key={i}>
-                <p>{data.name}</p>
+                <a href={data.url}>{data.name}</a>
                 {' '}
                 <p>{data.url}</p>
                 <img src={props.imageUrl[i]} alt="pokemon" />
