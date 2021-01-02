@@ -3,6 +3,7 @@
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import reqMakerForPokemon from '../helpers/requestMakerForPokemon';
+import NavBar from './Navbar';
 
 function mapStateToProps(state) {
   const {
@@ -40,6 +41,7 @@ const Pokemon = props => {
   }
   return (
     <div>
+      <NavBar />
       {renderedComponent}
     </div>
   );

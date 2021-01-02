@@ -1,0 +1,16 @@
+body {
+  overflow-y: scroll !important;
+  box-sizing: content-box !important;
+
+  & .my-button {
+    height: 50px;
+    margin-bottom: 50px;
+  }
+
+  & .pokemon-div-1 {
+    &:hover {
+      transform: translateY(-3px);
+      background-color: rgb(190, 190, 190);
+    }
+  }
+}

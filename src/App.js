@@ -7,7 +7,8 @@ import React, { useState, useEffect } from 'react';
 import requestMaker from './helpers/requestMaker';
 import reqMakerForPokemon from './helpers/requestMakerForPokemon';
 import NavBar from './components/Navbar';
-import './App.css';
+import './App.scss';
+import Footer from './components/Footer';
 
 function mapStateToProps(state) {
   const {
@@ -66,27 +67,31 @@ function App(props) {
       element.species.name.indexOf(searchState) !== -1
     ));
     renderedComponent = (
-      <div className="styledDiv">
-        {
+      <>
+        <div className="d-flex flex-wrap mb-5 justify-content-center mx-auto container">
+          {
           filteredComponent.map(data => {
             i += 1;
             return (
-              <div key={i}>
+              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 w-100">
+                <img src={filteredImage[i].sprites.front_default} alt="pokemon" className="card-img-top" />
                 <Link
                   to={data.url}
                   onClick={() => props.reqMakerForPokemon(data.url)}
                 >
                   {data.name}
                 </Link>
-                {' '}
-                <p>{data.url}</p>
-                <img src={filteredImage[i].sprites.front_default} alt="pokemon" />
               </div>
             );
           })
 }
-        <button type="button" onClick={() => handleLoadMore(props)}>Load More</button>
-      </div>
+        </div>
+        <div className="text-center">
+          <button type="button" className="btn btn-primary my-button" onClick={() => handleLoadMore(props)}>Load More</button>
+        </div>
+
+      </>
+
     );
   }
 
@@ -94,6 +99,7 @@ function App(props) {
     <>
       <NavBar handleChange={handleChange} value={searchState} />
       { renderedComponent }
+      <Footer />
     </>
   );
 }
