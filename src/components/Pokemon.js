@@ -32,7 +32,7 @@ const Pokemon = props => {
   } else {
     renderedComponent = (
       <div className="d-flex justify-content-center mt-5">
-        <div className="card col-lg-3 col-10 rounded shadow-lg bg-white pb-4">
+        <div className="card col-lg-4 col-7 rounded shadow-lg bg-white pb-4">
           <img src={url.sprites.front_default} alt="selected-pokemon" className="card-img-top" />
           <div className="font-weight-bold">
             Name:

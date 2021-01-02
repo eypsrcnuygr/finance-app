@@ -72,9 +72,10 @@ function App(props) {
           filteredComponent.map(data => {
             i += 1;
             return (
-              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 w-100 rounded shadow-lg bg-white">
+              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 col-md-8 w-100 rounded shadow-lg bg-white px-0">
                 <img src={filteredImage[i].sprites.front_default} alt="pokemon" className="card-img-top" />
                 <Link
+                  className="text-light bg-dark py-3 link-element"
                   to={data.url}
                   onClick={() => props.reqMakerForPokemon(data.url)}
                 >
