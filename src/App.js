@@ -4,6 +4,7 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import requestMaker from './helpers/requestMaker';
+import reqMakerForPokemon from './helpers/requestMakerForPokemon';
 
 function mapStateToProps(state) {
   const {
@@ -17,6 +18,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   requestMaker: (value, imageUrl) => dispatch(requestMaker(value, imageUrl)),
+  reqMakerForPokemon: url => dispatch(reqMakerForPokemon(url)),
 });
 
 function App(props) {
@@ -42,7 +44,12 @@ function App(props) {
             i += 1;
             return (
               <div key={i}>
-                <Link to={data.url}>{data.name}</Link>
+                <Link
+                  to={data.url}
+                  onClick={() => props.reqMakerForPokemon(data.url)}
+                >
+                  {data.name}
+                </Link>
                 {' '}
                 <p>{data.url}</p>
                 <img src={props.imageUrl[i].sprites.front_default} alt="pokemon" />

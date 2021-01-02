@@ -16,3 +16,7 @@ export const fetchPokemon = url => ({
   type: 'FETCH_POKEMON',
   payload: url,
 });
+
+export const fetchPokemonLoading = () => ({
+  type: 'FETCH_POKEMON_LOADING',
+});

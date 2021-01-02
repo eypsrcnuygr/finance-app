@@ -1,5 +1,6 @@
 const initialState = {
   url: null,
+  isLoading: false,
 };
 
 const FetchPokemonDetailsReducer = (state = initialState, action) => {
@@ -7,6 +8,11 @@ const FetchPokemonDetailsReducer = (state = initialState, action) => {
     case 'FETCH_POKEMON':
       return {
         url: action.payload,
+        isLoading: false,
+      };
+    case 'FETCH_POKEMON_LOADING':
+      return {
+        isLoading: true,
       };
     default:
       return state;

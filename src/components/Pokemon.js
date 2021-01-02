@@ -1,29 +1,37 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
-import reqMakerForPokemon from '../helpers/requestMakerForPokemon';
 
 function mapStateToProps(state) {
   const {
-    url,
+    url, isLoading,
   } = state.FetchPokemonDetailsReducer;
 
   return {
-    url,
+    url, isLoading,
   };
 }
 
-const mapDispatchToProps = dispatch => ({
-  reqMakerForPokemon: url => dispatch(reqMakerForPokemon(url)),
-});
-
 const Pokemon = props => {
-  reqMakerForPokemon(props);
+  let renderedComponent;
+  if (props.isLoading || !props.url) {
+    renderedComponent = (<div>Loading</div>);
+  } else {
+    renderedComponent = (
+      <div>
+        {props.url.base_experience}
+        {' '}
+        {props.url.forms[0].name}
+        {' '}
+        <img src={props.url.sprites.front_default} alt="selected-pokemon" />
+      </div>
+    );
+  }
   return (
     <div>
-      <button type="button" onClick={() => props.reqMakerForPokemon(props)}>Click</button>
+      {renderedComponent}
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);
+export default connect(mapStateToProps, null)(Pokemon);
