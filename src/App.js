@@ -30,13 +30,19 @@ function App(props) {
   useEffect(() => {
     window.onscroll = () => {
       const {
-        value, imageUrl, requestMaker,
+        value, imageUrl, requestMaker, isFetching,
       } = props;
       if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
         requestMaker();
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (props.isFetching) {
+      window.scrollTo(0, 0);
+    }
+  });
 
   const handleChange = dataFromChild => {
     setSearchState(dataFromChild);

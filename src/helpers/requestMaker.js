@@ -9,7 +9,7 @@ import {
 let offset = 100;
 function requestMaker() {
   return dispatch => {
-    dispatch(fetchProductBeginning);
+    dispatch(fetchProductBeginning());
     const dataArr = [];
     const pokeNumber = [];
     const data3 = [];
