@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import AppContainer from './components/appContainer';
 import reportWebVitals from './reportWebVitals';
 import store from './store/index';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <React.StrictMode>

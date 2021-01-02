@@ -3,8 +3,10 @@
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import requestMaker from './helpers/requestMaker';
 import reqMakerForPokemon from './helpers/requestMakerForPokemon';
+import NavBar from './components/Navbar';
 
 function mapStateToProps(state) {
   const {
@@ -22,6 +24,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function App(props) {
+  const [searchState, setSearchState] = useState('');
+
+  const handleChange = dataFromChild => {
+    setSearchState(dataFromChild);
+  };
+
   const handleClick = props => {
     const {
       value, imageUrl, requestMaker,
@@ -37,10 +45,12 @@ function App(props) {
       </div>
     );
   } else {
+    const filteredComponent = props.value
+      .filter(element => element.name.indexOf(searchState) !== -1);
     renderedComponent = (
       <div>
         {
-          props.value.map(data => {
+          filteredComponent.map(data => {
             i += 1;
             return (
               <div key={i}>
@@ -63,6 +73,7 @@ function App(props) {
 
   return (
     <>
+      <NavBar handleChange={handleChange} value={searchState} />
       { renderedComponent }
     </>
   );
