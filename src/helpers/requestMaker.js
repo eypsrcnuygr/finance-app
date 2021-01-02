@@ -18,7 +18,7 @@ function requestMaker() {
         const response = await fetch(
           `${apiUrl}/pokemon?limit=100&offset=${offset}`,
         );
-        offset < 1100 ? offset += 100 : offset = 1100;
+        offset < 1100 ? offset += 100 : offset = 100;
         const data = await response.json();
         dataArr.push(data.results);
 

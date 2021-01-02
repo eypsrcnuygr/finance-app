@@ -56,8 +56,8 @@ function App(props) {
   let i = -1;
   if (props.value === null) {
     renderedComponent = (
-      <div>
-        <button onClick={() => handleClick(props)} type="button">Show List</button>
+      <div className="d-flex justify-content-center mt-5">
+        <button onClick={() => handleClick(props)} type="button" className="btn btn-danger button-show">Show List</button>
       </div>
     );
   } else {
@@ -68,12 +68,12 @@ function App(props) {
     ));
     renderedComponent = (
       <>
-        <div className="d-flex flex-wrap mb-5 justify-content-center mx-auto container">
+        <div className="d-flex flex-wrap mb-5 mt-5 justify-content-center mx-auto container">
           {
           filteredComponent.map(data => {
             i += 1;
             return (
-              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 w-100">
+              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 w-100 rounded shadow-lg bg-white">
                 <img src={filteredImage[i].sprites.front_default} alt="pokemon" className="card-img-top" />
                 <Link
                   to={data.url}
@@ -87,7 +87,7 @@ function App(props) {
 }
         </div>
         <div className="text-center">
-          <button type="button" className="btn btn-primary my-button" onClick={() => handleLoadMore(props)}>Load More</button>
+          <button type="button" className="btn btn-danger my-button font-weight-bold" onClick={() => handleLoadMore(props)}>Load More</button>
         </div>
 
       </>
