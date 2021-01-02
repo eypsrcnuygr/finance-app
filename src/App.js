@@ -2,6 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import requestMaker from './helpers/requestMaker';
 
 function mapStateToProps(state) {
@@ -41,10 +42,10 @@ function App(props) {
             i += 1;
             return (
               <div key={i}>
-                <a href={data.url}>{data.name}</a>
+                <Link to={data.url}>{data.name}</Link>
                 {' '}
                 <p>{data.url}</p>
-                <img src={props.imageUrl[i]} alt="pokemon" />
+                <img src={props.imageUrl[i].sprites.front_default} alt="pokemon" />
               </div>
             );
           })

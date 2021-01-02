@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
 import { apiUrl, apiUrl2 } from './variables';
 import {
@@ -33,7 +32,7 @@ function requestMaker() {
             `${apiUrl2}/${number}`,
           );
           const data2 = await response2.json();
-          data3.push(data2.sprites.front_default);
+          data3.push(data2);
         }
         dispatch(fetchProductsSuccess(dataArr[0], data3));
 

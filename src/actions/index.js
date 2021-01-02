@@ -11,3 +11,8 @@ export const fetchProductsFailure = error => ({
   type: 'FETCH_PRODUCTS_FAILURE',
   payload: error,
 });
+
+export const fetchPokemon = url => ({
+  type: 'FETCH_POKEMON',
+  payload: url,
+});
