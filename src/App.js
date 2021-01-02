@@ -59,6 +59,9 @@ function App(props) {
   } else {
     const filteredComponent = props.value
       .filter(element => element.name.indexOf(searchState) !== -1);
+    const filteredImage = props.imageUrl.filter(element => (
+      element.species.name.indexOf(searchState) !== -1
+    ));
     renderedComponent = (
       <div className="styledDiv">
         {
@@ -74,7 +77,7 @@ function App(props) {
                 </Link>
                 {' '}
                 <p>{data.url}</p>
-                <img src={props.imageUrl[i].sprites.front_default} alt="pokemon" />
+                <img src={filteredImage[i].sprites.front_default} alt="pokemon" />
               </div>
             );
           })
