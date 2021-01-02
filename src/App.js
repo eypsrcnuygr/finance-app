@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import requestMaker from './helpers/requestMaker';
 import reqMakerForPokemon from './helpers/requestMakerForPokemon';
 import NavBar from './components/Navbar';
@@ -40,21 +38,22 @@ function App(props) {
 
   const handleClick = props => {
     const {
-      value, imageUrl, requestMaker,
+      requestMaker,
     } = props;
     requestMaker();
   };
 
   const handleLoadMore = props => {
     const {
-      value, imageUrl, requestMaker,
+      requestMaker,
     } = props;
     requestMaker();
   };
 
   let renderedComponent;
   let i = -1;
-  if (props.value === null) {
+  const { value } = props;
+  if (value === null) {
     renderedComponent = (
       <div className="d-flex justify-content-center mt-5">
         <button onClick={() => handleClick(props)} type="button" className="btn btn-danger button-show">Show List</button>
@@ -103,5 +102,21 @@ function App(props) {
     </>
   );
 }
+
+App.propTypes = {
+  isFetching: PropTypes.bool,
+  value: PropTypes.instanceOf(Object),
+  requestMaker: PropTypes.func,
+  imageUrl: PropTypes.instanceOf(Array),
+  reqMakerForPokemon: PropTypes.func,
+};
+
+App.defaultProps = {
+  isFetching: false,
+  value: {},
+  requestMaker: null,
+  imageUrl: [],
+  reqMakerForPokemon: null,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

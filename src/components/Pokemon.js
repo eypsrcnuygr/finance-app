@@ -1,7 +1,6 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import reqMakerForPokemon from '../helpers/requestMakerForPokemon';
 import NavBar from './Navbar';
 import Footer from './Footer';
@@ -24,35 +23,36 @@ const Pokemon = props => {
   let renderedComponent;
 
   useEffect(() => {
-    props.reqMakerForPokemon(props.location.pathname.slice(1));
+    const { reqMakerForPokemon, location } = props;
+    reqMakerForPokemon(location.pathname.slice(1));
   }, []);
-
-  if (props.isLoading || !props.url) {
+  const { isLoading, url } = props;
+  if (isLoading || !url) {
     renderedComponent = (<div>Loading</div>);
   } else {
     renderedComponent = (
       <div className="d-flex justify-content-center mt-5">
         <div className="card col-lg-3 col-10 rounded shadow-lg bg-white pb-4">
-          <img src={props.url.sprites.front_default} alt="selected-pokemon" className="card-img-top" />
+          <img src={url.sprites.front_default} alt="selected-pokemon" className="card-img-top" />
           <div className="font-weight-bold">
             Name:
-            {props.url.forms[0].name}
+            {url.forms[0].name}
           </div>
           <div className="font-weight-bold">
             Base experience:
-            {props.url.base_experience}
+            {url.base_experience}
           </div>
           <div className="font-weight-bold">
             Height:
-            {props.url.height}
+            {url.height}
           </div>
           <div className="font-weight-bold">
             Weight:
-            {props.url.weight}
+            {url.weight}
           </div>
           <div className="font-weight-bold">
             Abilities:
-            {props.url.abilities.map(element => element.ability.name)}
+            {url.abilities.map(element => element.ability.name)}
           </div>
         </div>
       </div>
@@ -66,6 +66,19 @@ const Pokemon = props => {
       <Footer />
     </div>
   );
+};
+
+Pokemon.propTypes = {
+  reqMakerForPokemon: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object),
+  url: PropTypes.instanceOf(Object),
+  isLoading: PropTypes.bool,
+};
+
+Pokemon.defaultProps = {
+  location: {},
+  url: {},
+  isLoading: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);

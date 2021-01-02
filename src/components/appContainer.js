@@ -1,7 +1,6 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import App from '../App';
 import Pokemon from './Pokemon';
 
@@ -17,9 +16,9 @@ function mapStateToProps(state) {
 
 const AppContainer = props => {
   const urlArr = [];
-
-  if (props.imageUrl) {
-    props.imageUrl.map(element => (
+  const { imageUrl } = props;
+  if (imageUrl) {
+    imageUrl.map(element => (
       urlArr.push(element.species.url)
     ));
   }
@@ -31,6 +30,14 @@ const AppContainer = props => {
       </Switch>
     </BrowserRouter>
   );
+};
+
+AppContainer.propTypes = {
+  imageUrl: PropTypes.instanceOf(Array),
+};
+
+AppContainer.defaultProps = {
+  imageUrl: [],
 };
 
 export default connect(mapStateToProps, null)(AppContainer);
