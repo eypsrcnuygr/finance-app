@@ -32,12 +32,8 @@ function App(props) {
       const {
         value, imageUrl, requestMaker,
       } = props;
-      console.log(window.innerHeight);
-      console.log(window.pageYOffset);
-      console.log(document.body.offsetHeight);
-      if ((window.innerHeight + window.pageYOffset) >= document.querySelector('.styledDiv').offsetHeight) {
-        alert("you're at the bottom of the page");
-        // requestMaker(value, imageUrl);
+      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
+        requestMaker();
       }
     };
   }, []);
@@ -50,7 +46,7 @@ function App(props) {
     const {
       value, imageUrl, requestMaker,
     } = props;
-    requestMaker(value, imageUrl);
+    requestMaker();
   };
   let renderedComponent;
   let i = -1;

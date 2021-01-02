@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-import { apiUrl, apiUrl2 } from './variables';
+import { apiUrl } from './variables';
 import {
   fetchProductBeginning, fetchProductsSuccess, fetchProductsFailure,
 } from '../actions/index';
 
+let offset = 100;
 function requestMaker() {
   return dispatch => {
     dispatch(fetchProductBeginning);
@@ -14,8 +16,9 @@ function requestMaker() {
     (async function getReq() {
       try {
         const response = await fetch(
-          `${apiUrl}/pokemon?limit=100&offset=100`,
+          `${apiUrl}/pokemon?limit=100&offset=${offset}`,
         );
+        offset < 1100 ? offset += 100 : offset = 1100;
         const data = await response.json();
         dataArr.push(data.results);
 
@@ -27,9 +30,10 @@ function requestMaker() {
             return pokeNumber;
           })
         ));
-        for (const number of pokeNumber) {
+
+        for (const url of data.results) {
           const response2 = await fetch(
-            `${apiUrl2}/${number}`,
+            `${url.url}`,
           );
           const data2 = await response2.json();
           data3.push(data2);
