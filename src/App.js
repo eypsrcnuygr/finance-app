@@ -3,10 +3,11 @@
 /* eslint-disable react/prop-types */
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import requestMaker from './helpers/requestMaker';
 import reqMakerForPokemon from './helpers/requestMakerForPokemon';
 import NavBar from './components/Navbar';
+import './App.css';
 
 function mapStateToProps(state) {
   const {
@@ -25,6 +26,21 @@ const mapDispatchToProps = dispatch => ({
 
 function App(props) {
   const [searchState, setSearchState] = useState('');
+
+  useEffect(() => {
+    window.onscroll = () => {
+      const {
+        value, imageUrl, requestMaker,
+      } = props;
+      console.log(window.innerHeight);
+      console.log(window.pageYOffset);
+      console.log(document.body.offsetHeight);
+      if ((window.innerHeight + window.pageYOffset) >= document.querySelector('.styledDiv').offsetHeight) {
+        alert("you're at the bottom of the page");
+        // requestMaker(value, imageUrl);
+      }
+    };
+  }, []);
 
   const handleChange = dataFromChild => {
     setSearchState(dataFromChild);
@@ -48,7 +64,7 @@ function App(props) {
     const filteredComponent = props.value
       .filter(element => element.name.indexOf(searchState) !== -1);
     renderedComponent = (
-      <div>
+      <div className="styledDiv">
         {
           filteredComponent.map(data => {
             i += 1;

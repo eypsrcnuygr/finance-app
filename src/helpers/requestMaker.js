@@ -14,7 +14,7 @@ function requestMaker() {
     (async function getReq() {
       try {
         const response = await fetch(
-          `${apiUrl}/pokemon?limit=100&offset=200`,
+          `${apiUrl}/pokemon?limit=100&offset=100`,
         );
         const data = await response.json();
         dataArr.push(data.results);
