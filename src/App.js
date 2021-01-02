@@ -20,23 +20,12 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  requestMaker: (value, imageUrl) => dispatch(requestMaker(value, imageUrl)),
+  requestMaker: () => dispatch(requestMaker()),
   reqMakerForPokemon: url => dispatch(reqMakerForPokemon(url)),
 });
 
 function App(props) {
   const [searchState, setSearchState] = useState('');
-
-  useEffect(() => {
-    window.onscroll = () => {
-      const {
-        value, imageUrl, requestMaker, isFetching,
-      } = props;
-      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
-        requestMaker();
-      }
-    };
-  }, []);
 
   useEffect(() => {
     if (props.isFetching) {
@@ -54,6 +43,14 @@ function App(props) {
     } = props;
     requestMaker();
   };
+
+  const handleLoadMore = props => {
+    const {
+      value, imageUrl, requestMaker,
+    } = props;
+    requestMaker();
+  };
+
   let renderedComponent;
   let i = -1;
   if (props.value === null) {
@@ -88,6 +85,7 @@ function App(props) {
             );
           })
 }
+        <button type="button" onClick={() => handleLoadMore(props)}>Load More</button>
       </div>
     );
   }
