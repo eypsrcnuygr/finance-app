@@ -2,6 +2,7 @@ body {
   overflow-y: scroll !important;
   box-sizing: content-box !important;
   background-color: rgb(129, 188, 255) !important;
+
   & .my-button {
     height: 50px;
     margin-bottom: 50px;
@@ -31,6 +32,7 @@ body {
 @media screen and (max-width: 768px) {
   .pokemon-div-1 {
     height: max-content;
+
     & > img {
       height: 200px !important;
     }
