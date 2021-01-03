@@ -53,14 +53,14 @@ function App(props) {
   let renderedComponent;
   let i = -1;
   const { value } = props;
-  if (value === null) {
+  if (!value) {
     renderedComponent = (
       <div className="d-flex justify-content-center mt-5">
         <button onClick={() => handleClick(props)} type="button" className="btn btn-danger button-show">Show List</button>
       </div>
     );
-  } else {
-    const filteredComponent = props.value
+  } else if (searchState) {
+    const filteredComponent = value
       .filter(element => element.name.indexOf(searchState) !== -1);
     const filteredImage = props.imageUrl.filter(element => (
       element.species.name.indexOf(searchState) !== -1
@@ -93,6 +93,34 @@ function App(props) {
       </>
 
     );
+  } else {
+    renderedComponent = (
+      <>
+        <div className="d-flex flex-wrap mb-5 mt-5 justify-content-center mx-auto container" role="dialog">
+          {
+          value.map(data => {
+            i += 1;
+            return (
+              <div key={i} className="card pokemon-div-1 text-center col-lg-3 col-12 col-md-8 w-100 rounded shadow-lg bg-white px-0">
+                <img src={props.imageUrl[i].sprites.front_default} alt="pokemon" className="card-img-top" />
+                <Link
+                  className="text-light bg-dark py-3 link-element"
+                  to={data.url}
+                  onClick={() => props.reqMakerForPokemon(data.url)}
+                >
+                  {data.name}
+                </Link>
+              </div>
+            );
+          })
+}
+        </div>
+        <div className="text-center">
+          <button type="button" className="btn btn-danger my-button font-weight-bold" onClick={() => handleLoadMore(props)}>Load More</button>
+        </div>
+
+      </>
+    );
   }
 
   return (
@@ -106,7 +134,7 @@ function App(props) {
 
 App.propTypes = {
   isFetching: PropTypes.bool,
-  value: PropTypes.instanceOf(Object),
+  value: PropTypes.instanceOf(Array),
   requestMaker: PropTypes.func,
   imageUrl: PropTypes.instanceOf(Array),
   reqMakerForPokemon: PropTypes.func,
@@ -114,7 +142,7 @@ App.propTypes = {
 
 App.defaultProps = {
   isFetching: false,
-  value: {},
+  value: [],
   requestMaker: null,
   imageUrl: [],
   reqMakerForPokemon: null,
