@@ -67,7 +67,7 @@ function App(props) {
     ));
     renderedComponent = (
       <>
-        <div className="d-flex flex-wrap mb-5 mt-5 justify-content-center mx-auto container">
+        <div className="d-flex flex-wrap mb-5 mt-5 justify-content-center mx-auto container" role="dialog">
           {
           filteredComponent.map(data => {
             i += 1;
