@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import reqMakerForPokemon from '../helpers/requestMakerForPokemon';
-import NavBar from './Navbar';
+import SecondNavBar from './secondNavbar';
 import Footer from './Footer';
 
 function mapStateToProps(state) {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 
 const Pokemon = props => {
   let renderedComponent;
-
+  let i;
   useEffect(() => {
     const { reqMakerForPokemon, location } = props;
     reqMakerForPokemon(location.pathname.slice(1));
@@ -52,7 +52,15 @@ const Pokemon = props => {
           </div>
           <div className="font-weight-bold">
             Abilities:
-            {url.abilities.map(element => element.ability.name)}
+            {url.abilities.map(element => {
+              i += 1;
+              return (
+                <span key={i}>
+                  {element.ability.name}
+                  {' '}
+                </span>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -61,7 +69,7 @@ const Pokemon = props => {
   }
   return (
     <div>
-      <NavBar />
+      <SecondNavBar />
       {renderedComponent}
       <Footer />
     </div>
