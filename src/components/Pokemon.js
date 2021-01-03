@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 
 const Pokemon = props => {
   let renderedComponent;
-  let i;
+  let i = 0;
   useEffect(() => {
     const { reqMakerForPokemon, location } = props;
     reqMakerForPokemon(location.pathname.slice(1));
