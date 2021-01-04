@@ -135,7 +135,9 @@ function App(props) {
             spinnerColor="#a85d32"
             textColor="#a85d32"
             text="Your pokemons are loading..."
-          />
+          >
+            Your pokemons are loading...
+          </ReactLoading>
         ) : (
           <div>{ renderedComponent }</div>
         )}
