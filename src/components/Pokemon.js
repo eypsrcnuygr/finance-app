@@ -5,7 +5,7 @@ import reqMakerForPokemon from '../helpers/requestMakerForPokemon';
 import SecondNavBar from './secondNavbar';
 import Footer from './Footer';
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const {
     url, isLoading,
   } = state.FetchPokemonDetailsReducer;
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
   return {
     url, isLoading,
   };
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   reqMakerForPokemon: url => dispatch(reqMakerForPokemon(url)),

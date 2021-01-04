@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import App from '../App';
 import Pokemon from './Pokemon';
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const {
     value, imageUrl, isFetching, error,
   } = state.FetchPokemonReducer;
@@ -12,7 +12,7 @@ function mapStateToProps(state) {
   return {
     value, imageUrl, isFetching, error,
   };
-}
+};
 
 const AppContainer = props => {
   const urlArr = [];

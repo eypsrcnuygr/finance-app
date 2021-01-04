@@ -9,7 +9,7 @@ import NavBar from './components/Navbar';
 import './App.scss';
 import Footer from './components/Footer';
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const {
     value, imageUrl, isFetching, error,
   } = state.FetchPokemonReducer;
@@ -17,14 +17,14 @@ function mapStateToProps(state) {
   return {
     value, imageUrl, isFetching, error,
   };
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   requestMaker: () => dispatch(requestMaker()),
   reqMakerForPokemon: url => dispatch(reqMakerForPokemon(url)),
 });
 
-function App(props) {
+const App = props => {
   const [searchState, setSearchState] = useState('');
 
   useEffect(() => {
@@ -145,7 +145,7 @@ function App(props) {
       <Footer />
     </>
   );
-}
+};
 
 App.propTypes = {
   isFetching: PropTypes.bool,
