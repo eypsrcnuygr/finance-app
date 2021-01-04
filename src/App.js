@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ReactLoading from 'react-loading-screen';
 import requestMaker from './helpers/requestMaker';
 import reqMakerForPokemon from './helpers/requestMakerForPokemon';
 import NavBar from './components/Navbar';
@@ -52,7 +53,7 @@ function App(props) {
 
   let renderedComponent;
   let i = -1;
-  const { value } = props;
+  const { value, isFetching } = props;
   if (!value) {
     renderedComponent = (
       <div className="d-flex justify-content-center mt-5">
@@ -126,7 +127,19 @@ function App(props) {
   return (
     <>
       <NavBar handleChange={handleChange} value={searchState} />
-      { renderedComponent }
+      <div>
+        {isFetching ? (
+          <ReactLoading
+            loading
+            bgColor="#32a852"
+            spinnerColor="#a85d32"
+            textColor="#a85d32"
+            text="Your pokemons are loading..."
+          />
+        ) : (
+          <div>{ renderedComponent }</div>
+        )}
+      </div>
       <Footer />
     </>
   );
